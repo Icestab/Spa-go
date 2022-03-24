@@ -1,0 +1,4 @@
+app:
+  name: spa-go
+  runMode: debug
+  port: 8086

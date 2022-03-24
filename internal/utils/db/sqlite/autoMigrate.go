@@ -5,4 +5,5 @@ import (
 )
 func AotoMigrate() {
 	 db.Sqlite.AutoMigrate(&admin.Admin{})
+	 
 }

@@ -2,3 +2,5 @@ app:
   name: spa-go
   runMode: debug
   port: 8086
+  jwtSecret: fsakfkasd
+  jwtTimeout: 8

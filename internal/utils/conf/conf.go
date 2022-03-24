@@ -1,4 +1,5 @@
 package conf
+
 import (
 	"log"
 
@@ -14,7 +15,7 @@ func Init() {
 
 func loadConfig() {
 	viper.SetConfigName("config")
-	viper.AddConfigPath("./config")
+	viper.AddConfigPath("../../config")
 	err := viper.ReadInConfig()
 	if err != nil {
 		panic(err)

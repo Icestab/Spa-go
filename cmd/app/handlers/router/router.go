@@ -38,20 +38,20 @@ func setupRouter() *gin.Engine {
 	r := gin.New()
 	r.Use(gin.Logger())
 	r.Use(gin.Recovery())
-
+	//r.Use(middleware.JWT())
 	r.GET("/health", base.Health)
 
 	api := r.Group("/api/v1")
 
 	user := api.Group("/user")
 	user.Use(middleware.JWT())
-	// {
-	// 	user.POST("", v1.UserCreate)
-	// 	user.GET("/:id", v1.UserGet)
-	// 	user.PUT("/:id", v1.UserUpdate)
-	// 	user.DELETE("/:id", v1.UserDelete)
-	// 	user.GET("/", v1.UserList)
-	// }
+	{
+		user.POST("", v1.UserCreate)
+		user.GET("/:id", v1.UserGet)
+		user.PUT("/:id", v1.UserUpdate)
+		user.DELETE("/:id", v1.UserDelete)
+		// user.GET("/", v1.UserList)
+	}
 
 	// policy := api.Group("/policy")
 	// policy.Use(middleware.Casbin(auth.Casbin))

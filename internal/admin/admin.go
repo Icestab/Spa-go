@@ -3,6 +3,7 @@ package admin
 import (
 	"spa-go/internal/auth"
 	"spa-go/internal/utils/db"
+	"spa-go/internal/utils/sha256"
 
 	"github.com/pkg/errors"
 )
@@ -21,7 +22,7 @@ func Token(pl LoginAdmin) (string, error) {
 	if pl.Username == "" || pl.Password == "" {
 		return "", ErrUsernameOrPasswordNil
 	}
-
+	pl.Password = sha256.Sha256(pl.Password)
 	var admin Admin
 	err := db.Sqlite.Where("username = ?", pl.Username).Where("password = ?", pl.Password).First(&admin).Error
 

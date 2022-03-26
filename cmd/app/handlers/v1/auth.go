@@ -9,6 +9,7 @@ import (
 
 func LogIn(c *gin.Context) {
 	var a admin.LoginAdmin
+
 	if err := c.ShouldBindJSON(&a); err != nil {
 		handlers.Re(c, -1, err.Error(), nil)
 		return

@@ -17,7 +17,7 @@ type Claims struct {
 func GenerateToken(uid uint) (string, error) {
 	jwtSecret = []byte(viper.GetString("app.jwtSecret"))
 	now := time.Now()
-	expireTime := now.Add(time.Hour * time.Duration(viper.GetInt("app.jwtOuttime")))
+	expireTime := now.Add(time.Hour * time.Duration(viper.GetInt("app.jwtTimeout")))
 	claims := Claims{
 		uid,
 		jwt.StandardClaims{
@@ -35,6 +35,7 @@ func ParseToken(token string) (*Claims, error) {
 	tokenClaims, err := jwt.ParseWithClaims(token, &Claims{}, func(token *jwt.Token) (interface{}, error) {
 		return jwtSecret, nil
 	})
+
 	if tokenClaims != nil {
 		if claims, ok := tokenClaims.Claims.(*Claims); ok && tokenClaims.Valid {
 			return claims, nil

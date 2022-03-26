@@ -61,9 +61,10 @@ func setupRouter() *gin.Engine {
 	// 	policy.GET("/:id", v1.PolicyGet)
 	// }
 
-	login := api.Group("/login")
+	login := api.Group("/admin")
 	{
 		login.POST("", v1.LogIn)
+		login.PUT("", v1.UpdatePasswd)
 	}
 
 	return r

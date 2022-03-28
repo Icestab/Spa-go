@@ -12,22 +12,22 @@ import (
 func JWT() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		code := 0
-		token := c.GetHeader("token")
+		token := c.GetHeader("Authorization")
 		if token == "" {
-			code = -1
+			code = 401
 		} else {
 			claims, err := auth.ParseToken(token)
 			log.Println(claims)
 			if err != nil {
-				code = -2
+				code = 403
 			}
 		}
 
 		if code != 0 {
 			c.JSON(http.StatusOK, gin.H{
-				"code":    code,
-				"message": "Auth Error",
-				"data":    nil,
+				"code": code,
+				"msg":  "Auth Error",
+				"data": nil,
 			})
 			c.Abort()
 			return

@@ -39,6 +39,7 @@ func setupRouter() *gin.Engine {
 	r.Use(gin.Logger())
 	r.Use(gin.Recovery())
 	//r.Use(middleware.JWT())
+	r.Use(middleware.Cors())
 	r.GET("/health", base.Health)
 
 	api := r.Group("/api/v1")
